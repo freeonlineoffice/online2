@@ -1274,7 +1274,7 @@ fi
 AC_SUBST(ENABLE_SETCAP)
 
 AC_CONFIG_LINKS([discovery.xml:discovery.xml])
-AC_CONFIG_LINKS([browser/package.json:browser/package.json])
+
 AC_CONFIG_LINKS([cypress_test/package.json:cypress_test/package.json])
 AC_CONFIG_LINKS([cypress_test/cypress.json:cypress_test/cypress.json])
 AC_CONFIG_COMMANDS_PRE([
@@ -1512,27 +1512,13 @@ AC_CONFIG_FILES([Makefile
                  cypress_test/Makefile
                  gtk/Makefile
                  test/Makefile
-                 browser/Makefile
-                 browser/npm-shrinkwrap.json
+
                  loolkitconfig.xcu
                  loolwsd.spec
                  loolwsd.xml
                  debian/loolwsd.postinst])
 
-if test "$enable_iosapp" = "yes"; then
-    AC_CONFIG_FILES([ios/config.h
-                 ios/Mobile/Info.plist
-                 ios/Mobile/Resources/Settings.bundle/Root.plist])
-fi
 
-if test "$enable_androidapp" = "yes"; then
-    AC_CONFIG_FILES([$srcdir/android/build.gradle:android/build.gradle.in
-                 $srcdir/android/app/build.gradle:android/app/build.gradle.in
-                 $srcdir/android/lib/build.gradle:android/lib/build.gradle.in
-                 $srcdir/android/app/appSettings.gradle:android/app/appSettings.gradle.in
-                 $srcdir/android/lib/libSettings.gradle:android/lib/libSettings.gradle.in
-                 $srcdir/android/lib/src/main/cpp/CMakeLists.txt:android/lib/src/main/cpp/CMakeLists.txt.in])
-fi
 
 AC_CONFIG_FILES([test/run_unit.sh],[chmod +x test/run_unit.sh])
 AC_CONFIG_FILES([test/run_unit_standalone.sh],[chmod +x test/run_unit_standalone.sh])

@@ -2,15 +2,11 @@ ETAGS=ctags -e
 
 if ENABLE_MOBILEAPP
 
-if ENABLE_GTKAPP
-SUBDIRS = gtk browser
-else
-SUBDIRS = browser
 endif
 
-else
 
-SUBDIRS = . browser test cypress_test
+
+SUBDIRS = .  test cypress_test
 
 export ENABLE_DEBUG
 
@@ -140,7 +136,7 @@ loolwsd_json = $(patsubst %.cpp,%.cmd,$(loolwsd_sources))
 loolwsd_SOURCES = $(loolwsd_sources) \
                   $(shared_sources)
 
-EXTRA_loolwsd_DEPENDENCIES = browser/node_modules
+EXTRA_loolwsd_DEPENDENCIES =
 
 noinst_PROGRAMS = clientnb \
                   connect \
@@ -475,14 +471,6 @@ run-one: setup-wsd
 			  --singlekit
 endif
 
-sync-writer:
-	browser-sync start --config browsersync-config.js --startPath "browser/96c23f663/lool.html?file_path=file://$(abs_top_srcdir)/test/data/hello-world.odt"
-
-sync-calc:
-	browser-sync start --config browsersync-config.js --startPath "browser/96c23f663/lool.html?file_path=file://$(abs_top_srcdir)/test/data/hello-world.ods"
-
-sync-impress:
-	browser-sync start --config browsersync-config.js --startPath "browser/96c23f663/lool.html?file_path=file://$(abs_top_srcdir)/test/data/hello-world.odp"
 
 run-trace: setup-wsd
 	./loolwsd --o:sys_template_path="@SYSTEMPLATE_PATH@" \
@@ -568,7 +556,7 @@ all-local: $(ALL_LOCAL_DEPS) @JAILS_PATH@ $(SYSTEM_STAMP)
 # just run the build without any tests
 build-nocheck: all-am
 
-endif
+
 
 define file_target
 $(1): $(2)
@@ -605,8 +593,6 @@ $(abs_srcdir)/compile_commands.json: $(JSON_COMPILE_SRC)
 
 compile_commands: $(abs_srcdir)/compile_commands.json
 
-browser/node_modules: browser/package.json browser/node_shrinkpack
-	@cd browser && npm install
 
 
 stress_file=$(abs_top_srcdir)/test/data/hello-world.odt
