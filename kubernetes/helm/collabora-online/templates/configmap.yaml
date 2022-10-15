@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Values.global.configmap.name }}
-  namespace: {{ .Values.namespace.collabora }}
-data:
-  timeout-tunnel: 3600s

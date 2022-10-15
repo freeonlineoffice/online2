@@ -1,4 +1,0 @@
-apiVersion: v1
-description: LibreOffice Online helm chart
-name: collabora-online
-version: 0.0.1
