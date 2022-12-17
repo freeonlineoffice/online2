@@ -24,7 +24,7 @@ on:
 jobs:
   analyze:
     name: Analyze
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     strategy:
       fail-fast: false
@@ -63,6 +63,7 @@ jobs:
         sudo sh -c "echo deb-src http://security.ubuntu.com/ubuntu/ focal-security universe >> /etc/apt/sources.list"
         sudo sh -c "echo deb-src http://security.ubuntu.com/ubuntu/ focal-security multiverse >> /etc/apt/sources.list"
         sudo apt-get update
+        sudo apt install -y libunwind-dev
         sudo apt-get install -y build-essential git libpoco-dev libcap-dev python3-polib npm libpng-dev python3-lxml libpam-dev libzstd-dev
         sudo apt-get build-dep -y libreoffice
 
@@ -75,8 +76,8 @@ jobs:
     - if: matrix.language == 'cpp'
       name: Configure
       run: |
-        cd .. && wget https://github.com/freeonlineoffice/online/releases/download/Core-LibreOffice-Assets/core-lo-7.5-alpha-2022-09-04-assets.tar.gz
-        tar xvf core-lo-7.5-alpha-2022-09-04-assets.tar.gz && rm core-lo-7.5-alpha-2022-09-04-assets.tar.gz && export LOCOREPATH=$(pwd)
+        cd .. && wget https://github.com/freeonlineoffice/online/releases/download/Core-LibreOffice-Assets/core-lo-7.5-alpha-2022-11-20-assets.tar.gz
+        tar xvf core-lo-7.5-alpha-2022-11-20-assets.tar.gz && rm core-lo-7.5-alpha-2022-11-20-assets.tar.gz && export LOCOREPATH=$(pwd)
         cd online && ./autogen.sh
         ./configure --enable-silent-rules --with-lokit-path=${LOCOREPATH}/include --with-lo-path=${LOCOREPATH}/instdir --enable-debug --disable-setcap
         cd browser && npm update
